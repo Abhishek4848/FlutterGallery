@@ -39,7 +39,7 @@ class ImagesState extends State<Images> {
               autoPlayInterval: Duration(seconds: 2),
               autoPlayAnimationDuration: Duration(milliseconds: 800),
               autoPlayCurve: Curves.fastOutSlowIn,
-              pauseAutoPlayOnTouch: Duration(seconds: 10),
+              pauseAutoPlayOnTouch: Duration(seconds: 4),
               onPageChanged: (index) {
                 setState(() {
                   _current = index;
