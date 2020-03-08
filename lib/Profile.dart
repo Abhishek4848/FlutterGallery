@@ -1,6 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:url_launcher/url_launcher.dart';
 //show BuildContext,Card;
 //import 'package:flutter/src/material/icons.dart';
+
+_callNumber() async{
+  const number = '9986946270'; //set the number here
+  bool res = await FlutterPhoneDirectCaller.callNumber(number);
+}
+_launchEmail() async {
+  String email = 'v.abhishek1347@gmail.com';
+  if (await canLaunch("mailto:$email")) {
+    await launch("mailto:$email");
+  } else {
+    throw 'Could not launch';
+  }
+}
 
 void main(){
   runApp(MyApp());
@@ -49,7 +64,9 @@ class MyApp extends StatelessWidget {
             width:150.0 ,
             child: Divider(color: Colors.white,),
             ),
-          Card (
+            InkWell(
+              onTap: (){_launchEmail();},
+          child: Card (
             margin:EdgeInsets.symmetric(vertical:10.0,horizontal:25.0),
             color:Colors.white,
 	          child:Padding(padding:EdgeInsets.all(15.0),
@@ -57,7 +74,10 @@ class MyApp extends StatelessWidget {
              ),
             ),
           ),
-            Card (
+            ),
+            InkWell(
+              onTap: (){_callNumber();},
+            child:Card (
             margin:EdgeInsets.symmetric(vertical:10.0,horizontal:25.0),
             color:Colors.white,
 	          child:Padding(padding:EdgeInsets.all(15.0),
@@ -65,6 +85,7 @@ class MyApp extends StatelessWidget {
              ),
             ),
           ),
+            ),
              ]
              ),
           ),
