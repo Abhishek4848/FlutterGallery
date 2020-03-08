@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:url_launcher/url_launcher.dart';
-//show BuildContext,Card;
-//import 'package:flutter/src/material/icons.dart';
 
 _callNumber() async{
-  const number = '9986946270'; //set the number here
+  const number = '9986946270'; 
   bool res = await FlutterPhoneDirectCaller.callNumber(number);
 }
 _launchEmail() async {
