@@ -26,6 +26,7 @@ dependencies:
   url_launcher:
   get_it:
   flutter_phone_direct_caller:
+  splashscreen:
   
 
 
