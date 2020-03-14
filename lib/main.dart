@@ -1,9 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
-import './Home.dart';
-import './Screen1.dart';
-import './Profile.dart';
+import 'login_page.dart';
+
 void main(){
   runApp(new MaterialApp(
     home: new Splash(),
@@ -19,7 +17,7 @@ class SplashState extends State<Splash> {
   Widget build(BuildContext context) {
     return new SplashScreen(
       seconds: 3,
-      navigateAfterSeconds: Alpha(),
+      navigateAfterSeconds: Gsignin(),
       image: Image.asset('images/gallery.png',alignment: Alignment.center,),
       title:Text('AlphaGallery',
       style:TextStyle( color: Colors.lightGreenAccent,
@@ -35,62 +33,16 @@ class SplashState extends State<Splash> {
   }
 }
 
-class Alpha extends StatefulWidget {
-  @override
-  State <StatefulWidget> createState(){
-    return AlphaState();
-  }
-}
-
-class AlphaState extends State<Alpha>{
-
-  int _currentIndex=0;
-
-  final tabs = [
-    Images(),
-    Gallery(),
-    MyApp()
-  ];
-
+class Gsignin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-      appBar:AppBar(
-        title:Text('Alpha'),
-        backgroundColor: Colors.blueGrey,
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Login',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
-      backgroundColor:Colors.black,
-      body: tabs[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-      currentIndex:_currentIndex,
-      selectedFontSize: 15.0,
-      unselectedFontSize: 10.0,
-      backgroundColor: Colors.black,
-        items: [
-         BottomNavigationBarItem(
-            icon: Icon(Icons.image, color: Colors.red,),
-            title: Text('Carousel',style:TextStyle(color: Colors.red),),
-            backgroundColor: Colors.blue,
-            ),
-            BottomNavigationBarItem(
-            icon: Icon(Icons.landscape,color: Colors.lightGreenAccent),
-            title: Text('Gallery',style:TextStyle(color:Colors.lightGreenAccent),),
-            backgroundColor: Colors.redAccent,
-            ),
-            BottomNavigationBarItem(
-            icon: Icon(Icons.person,color: Colors.lightBlue),
-            title: Text('About',style:TextStyle(color:Colors.lightBlue)),
-            backgroundColor: Colors.greenAccent,
-            ),
-          ],
-        onTap:(index){
-          setState(() {
-           _currentIndex=index;
-          });
-        }
-      ),
-      ),
+      home: LoginPage(),
     );
   }
 }

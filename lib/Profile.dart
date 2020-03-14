@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:url_launcher/url_launcher.dart';
+import './Login_page.dart';
+import './sign_in.dart';
 
 _callNumber() async{
   const number = '9986946270'; 
@@ -84,11 +86,29 @@ class MyApp extends StatelessWidget {
             ),
           ),
             ),
+             SizedBox(height: 40),
+              RaisedButton(
+                onPressed: () {
+                  signOutGoogle();
+                  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) {return LoginPage();}), ModalRoute.withName('/'));
+                },
+                color: Colors.orangeAccent,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Sign Out',
+                    style: TextStyle(fontSize: 20, color: Colors.black),
+                  ),
+                ),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(40)),
+              )
+
              ]
              ),
           ),
       ),
-      
     );
   }
 }
