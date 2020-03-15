@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import './Home.dart';
 import './Screen1.dart';
 import './Profile.dart';
-import './Login_page.dart';
 import './sign_in.dart';
+import './User_info.dart';
 
 class Alpha extends StatefulWidget {
   @override
@@ -28,18 +28,22 @@ class AlphaState extends State<Alpha>{
     return MaterialApp(
       home: Scaffold(
       appBar:AppBar(
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Colors.grey[800],
         title: Text('Alpha'),
         actions: <Widget>[
-                InkWell(
-                  onTap: () {
-                    print ('Click Profile Pic');
-                  },
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(25),
-                    child: Image.asset('images/pro.jpg',),
+            IconButton(
+              splashColor: Colors.lightGreenAccent,
+              icon:CircleAvatar(
+              radius: 30,
+              backgroundImage: NetworkImage(googleSignIn.currentUser.photoUrl)
+              ) ,
+             onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => UserInfo(),
                   )
-                ),          
+                ), 
+            ),       
         ],
       ),
       backgroundColor:Colors.black,

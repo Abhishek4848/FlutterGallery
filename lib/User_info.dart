@@ -2,16 +2,25 @@ import 'package:flutter/material.dart';
 import './login_page.dart';
 import './sign_in.dart';
 
-class FirstScreen extends StatelessWidget {
+void main(){
+  runApp(UserInfo());
+}
+
+class UserInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar:AppBar(
+        backgroundColor: Colors.grey[800],
+        brightness: Brightness.light,
+      ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [Colors.blue[100], Colors.blue[400]],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            stops: [0.3,1],
+            colors: [Colors.grey[900],Colors.black]
           ),
         ),
         child: Center(
@@ -20,9 +29,7 @@ class FirstScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               CircleAvatar(
-                backgroundImage: NetworkImage(
-                  imageUrl,
-                ),
+                backgroundImage: NetworkImage(googleSignIn.currentUser.photoUrl,),
                 radius: 60,
                 backgroundColor: Colors.transparent,
               ),
@@ -30,30 +37,30 @@ class FirstScreen extends StatelessWidget {
               Text(
                 'NAME',
                 style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black54),
+                    fontSize: 18,
+                    color: Colors.lightGreenAccent,
+                    fontFamily: 'ShadowsIntoLight',
+                    ),
               ),
-              Text(
-                name,
+              Text(googleSignIn.currentUser.displayName,
                 style: TextStyle(
                     fontSize: 25,
-                    color: Colors.deepPurple,
+                    color: Colors.tealAccent[400],
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 20),
               Text(
                 'EMAIL',
                 style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black54),
+                    fontSize: 18,
+                    color: Colors.lightGreenAccent,
+                    fontFamily: 'ShadowsIntoLight',
+                    ),
               ),
-              Text(
-                email,
+              Text(googleSignIn.currentUser.email,
                 style: TextStyle(
                     fontSize: 25,
-                    color: Colors.deepPurple,
+                    color: Colors.tealAccent[400],
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 40),
@@ -62,12 +69,12 @@ class FirstScreen extends StatelessWidget {
                   signOutGoogle();
                   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) {return LoginPage();}), ModalRoute.withName('/'));
                 },
-                color: Colors.deepPurple,
+                color: Colors.lightGreenAccent,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Sign Out',
-                    style: TextStyle(fontSize: 25, color: Colors.white),
+                    style: TextStyle(fontSize: 25, color: Colors.black),
                   ),
                 ),
                 elevation: 5,
