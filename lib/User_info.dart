@@ -11,6 +11,7 @@ class UserInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:AppBar(
+        elevation: 0.0,
         backgroundColor: Colors.grey[800],
         brightness: Brightness.light,
       ),
