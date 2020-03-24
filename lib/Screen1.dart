@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import './Fullscreen_image_view.dart';
 
 class Gallery extends StatefulWidget {
   @override
@@ -45,6 +46,8 @@ class _GalleryState extends State<Gallery> {
            elevation: 8.0,
            borderRadius: BorderRadius.all(Radius.circular(8.0)),
            child: InkWell(
+             onTap:()=>Navigator.push(context, MaterialPageRoute(
+               builder: (context)=>FullScreenImagePage(imgPath))) ,
              child: Hero(
                tag: imgPath,
                child: FadeInImage(
