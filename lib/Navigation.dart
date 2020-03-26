@@ -1,4 +1,5 @@
 
+import 'package:alpha/sign_in.dart';
 import 'package:flutter/material.dart';
 import './Home.dart';
 import './Screen1.dart';
@@ -26,6 +27,7 @@ class AlphaState extends State<Alpha>{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
       appBar:AppBar(
         backgroundColor: Colors.grey[800],
@@ -35,7 +37,7 @@ class AlphaState extends State<Alpha>{
               splashColor: Colors.lightGreenAccent,
               icon:CircleAvatar(
               radius: 30,
-              backgroundImage: NetworkImage(googleSignIn.currentUser.photoUrl)
+              backgroundImage: NetworkImage(imageUrl,)
               ) ,
              onPressed: () => Navigator.push(
                   context,
