@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './login_page.dart';
 import './sign_in.dart';
 
+
 void main(){
   runApp(UserInfo());
 }
@@ -12,7 +13,7 @@ class UserInfo extends StatelessWidget {
     return Scaffold(
       appBar:AppBar(
         elevation: 0.0,
-        backgroundColor: Colors.grey[800],
+        backgroundColor: Colors.grey,
         brightness: Brightness.light,
       ),
       body: Container(
@@ -30,7 +31,7 @@ class UserInfo extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               CircleAvatar(
-                backgroundImage: NetworkImage(googleSignIn.currentUser.photoUrl,),
+                backgroundImage: NetworkImage(imageUrl,),
                 radius: 60,
                 backgroundColor: Colors.transparent,
               ),
@@ -43,7 +44,7 @@ class UserInfo extends StatelessWidget {
                     fontFamily: 'ShadowsIntoLight',
                     ),
               ),
-              Text(googleSignIn.currentUser.displayName,
+              Text(name,
                 style: TextStyle(
                     fontSize: 25,
                     color: Colors.tealAccent[400],
@@ -58,7 +59,7 @@ class UserInfo extends StatelessWidget {
                     fontFamily: 'ShadowsIntoLight',
                     ),
               ),
-              Text(googleSignIn.currentUser.email,
+              Text(email,
                 style: TextStyle(
                     fontSize: 25,
                     color: Colors.tealAccent[400],
