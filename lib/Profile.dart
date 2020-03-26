@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:url_launcher/url_launcher.dart';
-import './Login_page.dart';
-import './sign_in.dart';
 
 _callNumber() async{
   const number = '9986946270'; 
@@ -16,6 +14,23 @@ _launchEmail() async {
     throw 'Could not launch';
   }
 }
+_launchInsta() async {
+  const url = 'https://www.instagram.com/a.b.h.i.s.h.e.k.4/';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
+_launchFB() async {
+  const url = 'https://www.facebook.com/abhishek.viveknanthan';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
 
 void main(){
   runApp(MyApp());
@@ -25,9 +40,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner:false,
-      home: Scaffold(
+      home:
+      Scaffold(
         backgroundColor: Colors.black,
-
         body:SafeArea (
           child:Column (
             mainAxisAlignment: MainAxisAlignment.center,
@@ -68,7 +83,7 @@ class MyApp extends StatelessWidget {
               onTap: (){_launchEmail();},
           child: Card (
             margin:EdgeInsets.symmetric(vertical:10.0,horizontal:25.0),
-            color:Colors.white,
+            color:Colors.lightGreenAccent,
 	          child:Padding(padding:EdgeInsets.all(15.0),
             child:Row(children:<Widget>[Icon(Icons.email,color:Colors.teal,),Text('v.abhishek1347@gmail.com')],
              ),
@@ -79,32 +94,45 @@ class MyApp extends StatelessWidget {
               onTap: (){_callNumber();},
             child:Card (
             margin:EdgeInsets.symmetric(vertical:10.0,horizontal:25.0),
-            color:Colors.white,
+            color:Colors.redAccent,
 	          child:Padding(padding:EdgeInsets.all(15.0),
-            child:Row(children:<Widget>[Icon(Icons.phone_android,color:Colors.teal,),Text('9986946270')],
+            child:Row(children:<Widget>[Icon(Icons.phone_in_talk,color:Colors.teal,),Text('9986946270')],
+             ),
+            ),
+             ),          
+            ),    
+          SizedBox(
+            height:10.0,
+            width:double.infinity,
+            //child: Divider(color: Colors.white,),
+            ),
+            InkWell(
+              onTap: (){_launchInsta();},
+          child: Card (
+            margin:EdgeInsets.symmetric(vertical:10.0,horizontal:25.0),
+            color:Colors.lightGreenAccent,
+	          child:Padding(padding:EdgeInsets.all(15.0),
+            child:Row(children:<Widget>[Icon(Icons.camera_enhance,color:Colors.teal,),Text('a.b.h.i.s.h.e.k.4')],
              ),
             ),
           ),
+            ), 
+          SizedBox(
+            height:10.0,
+            width:double.infinity,
+            //child: Divider(color: Colors.white,),
             ),
-             SizedBox(height: 40),
-              RaisedButton(
-                onPressed: () {
-                  signOutGoogle();
-                  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) {return LoginPage();}), ModalRoute.withName('/'));
-                },
-                color: Colors.orangeAccent,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'Sign Out',
-                    style: TextStyle(fontSize: 20, color: Colors.black),
-                  ),
-                ),
-                elevation: 5,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40)),
-              )
-
+            InkWell(
+              onTap: (){_launchFB();},
+          child: Card (
+            margin:EdgeInsets.symmetric(vertical:10.0,horizontal:25.0),
+            color:Colors.redAccent,
+	          child:Padding(padding:EdgeInsets.all(15.0),
+            child:Row(children:<Widget>[Icon(Icons.people,color:Colors.teal,),Text('Facebook')],
+             ),
+            ),
+          ),
+            ),                                 
              ]
              ),
           ),
