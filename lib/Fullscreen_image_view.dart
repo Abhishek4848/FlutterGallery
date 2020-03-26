@@ -18,6 +18,7 @@ class FullScreenImagePage extends StatefulWidget {
 
 class _FullScreenImagePageState extends State<FullScreenImagePage> {
   String _wallpaperFile = 'Unknown';
+  String _lockFile='Unknown';
   String _platformVersion = 'Unknown';
   @override
   void initState() {
@@ -39,7 +40,7 @@ class _FullScreenImagePageState extends State<FullScreenImagePage> {
     });
   }
 
-  Future<void> setWallpaperFromFile() async {
+  Future<void> homeWallpaper() async {
     setState(() {
       _wallpaperFile = "Loading";
     });
@@ -58,10 +59,29 @@ class _FullScreenImagePageState extends State<FullScreenImagePage> {
       _wallpaperFile = result;
     });
   }
+    Future<void> lockWallpaper() async {
+    setState(() {
+      _lockFile = "Loading";
+    });
+    String result1;
+    var file = await DefaultCacheManager().getSingleFile(widget.imgPath);
+    try {
+      result1 = await WallpaperManager.setWallpaperFromFile(
+          file.path, WallpaperManager.LOCK_SCREEN);
+    } on PlatformException {
+      result1 = 'Failed to get wallpaper.';
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      _lockFile = result1;
+    });
+  }
   final LinearGradient backgroundGradient = LinearGradient(
-      colors: [Colors.black,Colors.lightGreenAccent[200]],
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight);
+      colors: [Colors.black54,Colors.lightGreenAccent],
+      begin: Alignment.centerLeft,
+      end: Alignment.centerRight);
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +98,70 @@ class _FullScreenImagePageState extends State<FullScreenImagePage> {
                   child:Image.network(widget.imgPath),
                 ),
               ),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: FloatingActionButton.extended(
+                  heroTag: "btn1",
+                  onPressed: (){homeWallpaper();
+                  showDialog(context:context,
+                  builder: (BuildContext context){
+                    return AlertDialog(title: Text("Alpha",style: TextStyle(color: Colors.green),),
+                    content: Text("Applied HomeScreen wallpaper sucessfully !!!",style: TextStyle(color:Colors.lightGreenAccent),),
+                    backgroundColor: Colors.black45,
+                    shape: RoundedRectangleBorder(borderRadius:BorderRadius.all(Radius.circular(30.0))) ,
+                    actions: [
+                      RaisedButton(onPressed:(){Navigator.of(context).pop();}, 
+                      child: Text("OK",style: TextStyle(color:Colors.black),),
+                      color: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius:BorderRadius.all(Radius.circular(100.0))
+                      ),
+                      )
+                    ],
+                    );
+                   }
+                  );
+                  },
+                  icon: Icon(Icons.wallpaper),
+                  label: Text("HomeScreen"),
+                  foregroundColor: Colors.lightGreenAccent,
+                  backgroundColor: Colors.black,
+                  splashColor: Colors.limeAccent,
+                  elevation: 25.0,                  
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: FloatingActionButton.extended(
+                  heroTag: "btn2",
+                  onPressed: (){lockWallpaper();
+                  showDialog(context:context,
+                  builder: (BuildContext context){
+                    return AlertDialog(title: Text("Alpha",style: TextStyle(color:Colors.green),),
+                    content: Text("Applied LockScreen wallpaper sucessfully !!!!",style: TextStyle(color:Colors.lightGreenAccent),),
+                    backgroundColor: Colors.black45,
+                    shape: RoundedRectangleBorder(borderRadius:BorderRadius.all(Radius.circular(30.0))) ,                    
+                    actions: [
+                      RaisedButton(onPressed:(){Navigator.of(context).pop();}, 
+                      child: Text("OK",style: TextStyle(color:Colors.black),),
+                      color: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius:BorderRadius.all(Radius.circular(100.0))
+                      ),
+                      )
+                    ],
+                    );
+                   }
+                  );
+                  },
+                  icon: Icon(Icons.wallpaper),
+                  label: Text("LockScreen"),
+                  foregroundColor: Colors.lightGreenAccent,
+                  backgroundColor: Colors.black,
+                  splashColor: Colors.limeAccent,
+                  elevation: 25.0,                  
+                ),
+              ),              
             Align(
                 alignment: Alignment.topCenter,
                 child: Column(
@@ -102,17 +186,6 @@ class _FullScreenImagePageState extends State<FullScreenImagePage> {
           ),
         ),
       ),
-      floatingActionButton:
-        FloatingActionButton.extended(
-        onPressed:setWallpaperFromFile, 
-        icon:Icon(Icons.wallpaper,),
-        label: Text("Set Wallpaper"),
-        foregroundColor: Colors.lightGreenAccent,
-        splashColor: Colors.limeAccent,
-        elevation: 25.0,
-        backgroundColor: Colors.black,
-        )
-      
     );
   }
 }
