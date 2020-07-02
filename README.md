@@ -9,6 +9,7 @@ A gallery app to display images
 git clone https://github.com/Abhishek4848/FlutterGallery.git
 ```
 2. Run the app
-```flutter run
+```
+flutter run
 ```
 Visit [online documentation](https://flutter.dev/docs), for more info
