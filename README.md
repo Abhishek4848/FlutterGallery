@@ -8,7 +8,11 @@ A gallery app to display images
 ```
 git clone https://github.com/Abhishek4848/FlutterGallery.git
 ```
-2. Run the app
+2.Change to the current working directory
+```
+cd FlutterGallery
+```
+3. Run the app
 ```
 flutter run
 ```
